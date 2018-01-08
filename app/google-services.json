@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "426265352530",
+    "firebase_url": "https://the-social-app.firebaseio.com",
+    "project_id": "the-social-app",
+    "storage_bucket": "the-social-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426265352530:android:de4860421f74663d",
+        "android_client_info": {
+          "package_name": "com.buildinglabs.saurabh.snowhigh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426265352530-au80ihqt84soktd0gii2egscs9tle5rb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buildinglabs.saurabh.snowhigh",
+            "certificate_hash": "e03a36c08a3c3264dea00e939edfff0497ca261d"
+          }
+        },
+        {
+          "client_id": "426265352530-jafb2otlc600olrkh62tp7cj18903uk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdebJ7PyT7Hq_7oANRoUpopwT9ptaK7Fc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426265352530-jafb2otlc600olrkh62tp7cj18903uk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
