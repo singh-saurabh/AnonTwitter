@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/post_author_photo"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:src="@drawable/roundicons_06" />
 
 

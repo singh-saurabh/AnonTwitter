@@ -2,6 +2,8 @@ package com.buildinglabs.saurabh.snowhigh;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +38,8 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
     private DatabaseReference mPostReference;
     private DatabaseReference mCommentsReference;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
     private ValueEventListener mPostListener;
     private String mPostKey;
     private CommentAdapter mAdapter;
@@ -42,6 +48,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +61,20 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             throw new IllegalArgumentException("Must pass EXTRA_POST_KEY");
         }
 
-        // Initialize Database
+        // Initialize Database and Auth
         mPostReference = FirebaseDatabase.getInstance().getReference()
                 .child("posts").child(mPostKey);
         mCommentsReference = FirebaseDatabase.getInstance().getReference()
                 .child("post-comments").child(mPostKey);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         // Initialize Views
         mBodyView = findViewById(R.id.post_body);
         mCommentField = findViewById(R.id.field_comment_text);
         mCommentButton = findViewById(R.id.button_post_comment);
         mCommentsRecycler = findViewById(R.id.recycler_comments);
+        imageView = findViewById(R.id.photo_post_detail);
 
         mCommentButton.setOnClickListener(this);
         mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -84,6 +94,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 Post post = dataSnapshot.getValue(Post.class);
                 // [START_EXCLUDE]
                 mBodyView.setText(post.body);
+                imageView.setImageResource(setAuthorPhoto(post.photoid_post));
                 // [END_EXCLUDE]
             }
 
@@ -106,6 +117,18 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         // Listen for comments
         mAdapter = new CommentAdapter(this, mCommentsReference);
         mCommentsRecycler.setAdapter(mAdapter);
+    }
+
+    public int setAuthorPhoto (int i) {
+        switch (i){
+            case 1: return R.drawable.roundicons_01;
+            case 2: return R.drawable.roundicons_02;
+            case 3: return R.drawable.roundicons_03;
+            case 4: return R.drawable.roundicons_04;
+            case 5: return R.drawable.roundicons_05;
+            case 6: return R.drawable.roundicons_06;
+            default: return R.drawable.roundicons_06;
+        }
     }
 
     @Override
@@ -139,8 +162,9 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                         User user = dataSnapshot.getValue(User.class);
 
                         // Create new comment object
+                        int photoid_comment= user.photoid;
                         String commentText = mCommentField.getText().toString();
-                        Comment comment = new Comment(uid, commentText);
+                        Comment comment = new Comment(uid, commentText, photoid_comment);
 
                         // Push the comment, it will appear in the list
                         mCommentsReference.push().setValue(comment);
@@ -159,11 +183,13 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private static class CommentViewHolder extends RecyclerView.ViewHolder {
 
         public TextView bodyView;
+        public ImageView imageView;
 
         public CommentViewHolder(View itemView) {
             super(itemView);
 
             bodyView = itemView.findViewById(R.id.comment_body);
+            imageView =itemView.findViewById(R.id.comment_photo);
         }
     }
 
@@ -281,6 +307,19 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         public void onBindViewHolder(CommentViewHolder holder, int position) {
             Comment comment = mComments.get(position);
             holder.bodyView.setText(comment.text);
+            holder.imageView.setImageResource(setCommentPhoto(comment.photoid_comment));
+        }
+
+        public int setCommentPhoto (int i) {
+            switch (i){
+                case 1: return R.drawable.roundicons_01;
+                case 2: return R.drawable.roundicons_02;
+                case 3: return R.drawable.roundicons_03;
+                case 4: return R.drawable.roundicons_04;
+                case 5: return R.drawable.roundicons_05;
+                case 6: return R.drawable.roundicons_06;
+                default: return R.drawable.roundicons_01;
+            }
         }
 
         @Override

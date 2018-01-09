@@ -94,12 +94,16 @@ public abstract class PostListFragment extends Fragment {
                     }
                 });
 
+
+
                 // Determine if the current user has liked this post and set UI accordingly
                 if (model.stars.containsKey(getUid())) {
                     viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_24);
                 } else {
                     viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
                 }
+
+                viewHolder.imageView.setImageResource(setCommentPhoto(model.photoid_post));
 
                 // Bind Post to ViewHolder, setting OnClickListener for the star button
                 viewHolder.bindToPost(model, new View.OnClickListener() {
@@ -114,6 +118,17 @@ public abstract class PostListFragment extends Fragment {
                         onStarClicked(userPostRef);
                     }
                 });
+            }
+            public int setCommentPhoto (int i) {
+                switch (i){
+                    case 1: return R.drawable.roundicons_01;
+                    case 2: return R.drawable.roundicons_02;
+                    case 3: return R.drawable.roundicons_03;
+                    case 4: return R.drawable.roundicons_04;
+                    case 5: return R.drawable.roundicons_05;
+                    case 6: return R.drawable.roundicons_06;
+                    default: return R.drawable.roundicons_06;
+                }
             }
         };
         mRecycler.setAdapter(mAdapter);
