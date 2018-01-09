@@ -1,5 +1,5 @@
 # SnowHigh
-SnowHigh is a low storage and anonymous social media platform where you can share, comment and like posts from other users.
+SnowHigh is a low storage and anonymous social media platform for android where you can share, comment and like posts from other users.
 This application was made in accordance with MDG IIT Roorkee's guitelines https://mdg.sdslabs.co/droidwars/2017/12/04/droid-wars-17/
 
 All the necessary features have been implemented. 
@@ -17,3 +17,7 @@ For the additional features, there are
 
 Note: Since the user is getting authenticated, he is not completely anonymous. I still have access to your email ids (there was a requirement for sign-in in the project description)
 Whenever the app is closed and reopened, you get the activity to choose your avatar again. This is to maintain better anonymity.
+
+Languages Used: Java and XML 
+Software Used: Android Studio with Firebase and FirebaseUI
+
