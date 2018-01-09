@@ -34,7 +34,6 @@ public class  MainActivity extends BaseActivity {
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[] {
                     new RecentPostsFragment(),
-                    new MyPostsFragment(),
                     new MyTopPostsFragment(),
                     new MyPostsFragment(),
 
