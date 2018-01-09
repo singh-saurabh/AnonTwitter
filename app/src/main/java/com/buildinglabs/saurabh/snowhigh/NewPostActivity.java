@@ -68,12 +68,9 @@ public void onStart () {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        // Getting Post failed, log a message
                         Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                        // [START_EXCLUDE]
                         Toast.makeText(NewPostActivity.this, "Failed to load image.",
                                 Toast.LENGTH_SHORT).show();
-                        // [END_EXCLUDE]
                     }
                 }
         );
@@ -152,7 +149,6 @@ public void onStart () {
         }
     }
 
-    // [START write_fan_out]
     private void writeNewPost(String userId, String body, int photoid_post) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously

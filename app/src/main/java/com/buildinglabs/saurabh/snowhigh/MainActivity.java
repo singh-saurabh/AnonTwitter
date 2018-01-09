@@ -31,17 +31,18 @@ public class  MainActivity extends BaseActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        // Create the adapter that will return a fragment for each section
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[] {
                     new RecentPostsFragment(),
                     new MyPostsFragment(),
                     new MyTopPostsFragment(),
+                    new MyPostsFragment(),
+
             };
             private final String[] mFragmentNames = new String[] {
                     getString(R.string.heading_feed),
+                    getString(R.string.heading_my_top_posts),
                     getString(R.string.heading_my_posts),
-                    getString(R.string.heading_my_top_posts)
             };
 
 
@@ -59,13 +60,11 @@ public class  MainActivity extends BaseActivity {
                 return mFragmentNames[position];
             }
         };
-        // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mPagerAdapter);
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        // Button launches NewPostActivity
         findViewById(R.id.fab_new_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
